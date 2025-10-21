@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>爱心表白 - 张依诺 我爱你</title>
+    <title>爱心汇聚 - 张依诺</title>
     <style>
         * {
             margin: 0;
@@ -17,13 +17,12 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
         }
         /* 爱心容器 */
         .heart-container {
             position: relative;
-            width: 450px;
-            height: 450px;
+            width: 400px;
+            height: 400px;
         }
         /* 小爱心样式 */
         .small-heart {
@@ -38,92 +37,65 @@
         /* 大爱心样式 */
         .big-heart {
             position: absolute;
-            width: 220px;
-            height: 220px;
+            width: 400px;
+            height: 400px;
             background-color: #e53e3e;
             transform: rotate(45deg) scale(0);
             opacity: 0;
             animation: showBigHeart 1s ease-in-out 3s forwards;
-            box-shadow: 0 0 25px rgba(229, 62, 62, 0.6);
+            box-shadow: 0 0 20px rgba(229, 62, 62, 0.5);
         }
-        /* 文字样式 - 姓名 */
+        /* 文字样式 */
         .name-text {
             position: absolute;
-            font-size: 40px;
+            font-size: 36px;
             font-weight: bold;
             color: #ffffff;
             opacity: 0;
             animation: showText 1s ease-in-out 4s forwards;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-        }
-        /* 文字样式 - 表白语 */
-        .confession-text {
-            position: absolute;
-            font-size: 28px;
-            font-weight: 500;
-            color: #ffffff;
-            opacity: 0;
-            animation: showText 1s ease-in-out 4.5s forwards;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            margin-top: 60px;
         }
-        /* 分享按钮区域 */
-        .share-section {
-            position: fixed;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0;
-            animation: showShare 1s ease-in-out 5.5s forwards;
-        }
-        .share-btn {
-            padding: 12px 30px;
-            background-color: #e53e3e;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(229, 62, 62, 0.3);
-            transition: background-color 0.3s ease;
-            margin-bottom: 15px;
-        }
-        .share-btn:hover {
-            background-color: #c53030;
-        }
-        .copy-tip {
-            font-size: 14px;
-            color: #666;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .copy-tip.show {
-            opacity: 1;
-        }
-        /* 动画关键帧 */
+        /* 小爱心移动动画 */
         @keyframes moveToCenter {
-            0% { opacity: 1; transform: rotate(45deg) scale(1); }
-            80% { opacity: 1; }
-            100% { opacity: 0; transform: rotate(45deg) scale(0.5) translate(calc(var(--tx)), calc(var(--ty))); }
+            0% {
+                opacity: 1;
+                transform: rotate(45deg) scale(1);
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(45deg) scale(0.5) translate(calc(var(--tx)), calc(var(--ty)));
+            }
         }
+        /* 大爱心显示动画 */
         @keyframes showBigHeart {
-            0% { transform: rotate(45deg) scale(0); opacity: 0; }
-            100% { transform: rotate(45deg) scale(1); opacity: 1; }
+            0% {
+                transform: rotate(45deg) scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(45deg) scale(1);
+                opacity: 1;
+            }
         }
+        /* 文字显示动画 */
         @keyframes showText {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        @keyframes showShare {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-        /* 爱心伪元素（实现完整心形） */
-        .small-heart::before, .small-heart::after,
-        .big-heart::before, .big-heart::after {
+        /* 爱心伪元素实现完整爱心形状 */
+        .small-heart::before,
+        .small-heart::after,
+        .big-heart::before,
+        .big-heart::after {
             content: '';
             position: absolute;
             width: 100%;
@@ -131,47 +103,49 @@
             background-color: inherit;
             border-radius: 50%;
         }
-        .small-heart::before, .big-heart::before { top: -50%; left: 0; }
-        .small-heart::after, .big-heart::after { top: 0; left: -50%; }
+        .small-heart::before,
+        .big-heart::before {
+            top: -50%;
+            left: 0;
+        }
+        .small-heart::after,
+        .big-heart::after {
+            top: 0;
+            left: -50%;
+        }
     </style>
 </head>
 <body>
     <div class="heart-container">
         <div class="big-heart"></div>
-        <div class="name-text">张依诺</div>
-        <div class="confession-text">我爱你</div>
-    </div>
-
-    <!-- 分享区域 -->
-    <div class="share-section">
-        <button class="share-btn" id="copyLinkBtn">复制表白页面链接</button>
-        <div class="copy-tip" id="copyTip">链接已复制，快去分享给TA吧~</div>
+        <div class="name-text">张依诺 我爱你</div>
     </div>
 
     <script>
-        // 1. 动态创建小爱心并实现汇聚动画
+        // 创建小爱心元素
         const container = document.querySelector('.heart-container');
         const containerWidth = container.offsetWidth;
         const containerHeight = container.offsetHeight;
         const centerX = containerWidth / 2;
         const centerY = containerHeight / 2;
-        const heartCount = 120; // 增加小爱心数量，增强视觉效果
+        const heartCount = 100; // 小爱心数量
 
+        // 随机生成小爱心的初始位置和目标偏移量
         for (let i = 0; i < heartCount; i++) {
             const smallHeart = document.createElement('div');
             smallHeart.classList.add('small-heart');
             
-            // 随机生成小爱心初始位置（容器边缘）
+            // 随机初始位置（容器边缘）
             const angle = Math.random() * Math.PI * 2;
             const distance = Math.max(containerWidth, containerHeight) / 2;
             const x = centerX + Math.cos(angle) * distance;
             const y = centerY + Math.sin(angle) * distance;
             
-            // 计算小爱心到中心的偏移量（实现汇聚效果）
+            // 目标位置偏移量（指向中心）
             const tx = centerX - x;
             const ty = centerY - y;
             
-            // 设置小爱心样式和动画延迟
+            // 设置样式和动画延迟
             smallHeart.style.left = `${x}px`;
             smallHeart.style.top = `${y}px`;
             smallHeart.style.setProperty('--tx', `${tx}px`);
@@ -181,23 +155,13 @@
             container.appendChild(smallHeart);
         }
 
-        // 2. 定位大爱心和文字到容器中心
+        // 定位大爱心和文字到中心
         const bigHeart = document.querySelector('.big-heart');
         const nameText = document.querySelector('.name-text');
-        const confessionText = document.querySelector('.confession-text');
-        
-        // 大爱心居中
         bigHeart.style.left = `${centerX - bigHeart.offsetWidth / 2}px`;
         bigHeart.style.top = `${centerY - bigHeart.offsetHeight / 2}px`;
-        
-        // 文字组合居中（姓名+表白语整体居中）
-        const textGroupWidth = Math.max(nameText.offsetWidth, confessionText.offsetWidth);
-        const textGroupX = centerX - textGroupWidth / 2;
-        nameText.style.left = `${textGroupX}px`;
-        nameText.style.top = `${centerY - 40px}px`; // 姓名在上
-        confessionText.style.left = `${textGroupX}px`;
-        confessionText.style.top = `${centerY + 10px}px`; // 表白语在下
-
-        // 3. 实现链接复制功能
-        const copyLinkBtn = document.getElementById('copyLinkBtn');
-        const copyTip 
+        nameText.style.left = `${centerX - nameText.offsetWidth / 2}px`;
+        nameText.style.top = `${centerY - nameText.offsetHeight / 2}px`;
+    </script>
+</body>
+</html>
